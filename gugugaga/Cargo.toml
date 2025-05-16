@@ -1,0 +1,19 @@
+[package]
+name = "gugugaga"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+clap = { version = "4.4", features = ["derive", "env"] }
+eyre = "0.6.12"
+futures = "0.3.31"
+serde = { version = "1.0.219", features = ["derive", "rc"] }
+serde_json = "1.0.140"
+smol_str = { version = "0.3.2", features = ["serde"] }
+tokio = { version = "1.45.0", features = ["macros", "rt-multi-thread"] }
+tokio-tungstenite = "0.26.2"
+tracing = "0.1.41"
+tracing-subscriber = { version = "0.3.19", features = ["env-filter"] }
+zbus = { version = "5.7.0", features = ["tokio"] }

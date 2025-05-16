@@ -1,0 +1,23 @@
+services:
+  danmaku-server:
+    image: ghcr.io/pkuoriginalfire/danmaku-server:latest
+    platform: linux/amd64
+    container_name: danmaku-server
+    env_file:
+      - .env
+    ports:
+      - 5098:5098
+    restart: always
+
+  gugugaga:
+    image: ghcr.io/pkuoriginalfire/gugugaga:latest
+    platform: linux/amd64
+    ports:
+      - 14500:14500
+    volumes:
+      - ./data:/home/xuser/.config
+    security_opt:
+      - seccomp=unconfined
+    restart: unless-stopped
+    depends_on:
+      - danmaku-server
