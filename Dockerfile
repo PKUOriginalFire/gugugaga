@@ -26,7 +26,8 @@ RUN mkdir -p /run/user/1001 && \
     mkdir -p /tmp/.X11-unix && \
     chmod 1777 /tmp/.X11-unix
 
-RUN curl -o /home/xuser/QQ.AppImage https://dldir1.qq.com/qqfile/qq/QQNT/Linux/QQ_3.2.17_250429_x86_64_01.AppImage
+RUN mkdir -p /home/xuser & \
+    curl -o /home/xuser/QQ.AppImage https://dldir1.qq.com/qqfile/qq/QQNT/Linux/QQ_3.2.17_250429_x86_64_01.AppImage
 
 COPY ./start.sh /home/xuser/start.sh
 COPY --from=builder /app/gugugaga /home/xuser/gugugaga
