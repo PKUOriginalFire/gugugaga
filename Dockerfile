@@ -37,6 +37,9 @@ RUN chmod +x /home/xuser/start.sh && \
     chown -R root:root /home/xuser/QQ/chrome-sandbox && \
     chmod 4755 /home/xuser/QQ/chrome-sandbox
 
+RUN mkdir -p /run/user/$(id -u xuser) && \
+    chown -R xuser:xuser /run/user/$(id -u xuser)
+
 USER xuser
 WORKDIR /home/xuser
 
