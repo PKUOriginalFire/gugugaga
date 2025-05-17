@@ -1,8 +1,6 @@
 #!/bin/bash
-mkdir -p $HOME/.xpra
-mkdir -p $XDG_RUNTIME_DIR
-chmod 700 $XDG_RUNTIME_DIR
 
+export XDG_RUNTIME_DIR=/run/user/$UID
 export DISPLAY=:0
 
 xpra start :0 --bind-tcp=0.0.0.0:14500 --no-daemon \

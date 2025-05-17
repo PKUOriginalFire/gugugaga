@@ -21,31 +21,24 @@ RUN --mount=type=cache,target=/var/cache/apt \
     && apt-get clean
 
 # 创建必要的目录并设置权限
-RUN mkdir -p /run/user/1001 && \
-    chmod 700 /run/user/1001 && \
-    mkdir -p /tmp/.X11-unix && \
-    chmod 1777 /tmp/.X11-unix
-
-RUN mkdir -p /home/xuser & \
+RUN mkdir -p /home/xuser && \
     curl -o /home/xuser/QQ.AppImage https://dldir1.qq.com/qqfile/qq/QQNT/Linux/QQ_3.2.17_250429_x86_64_01.AppImage
 
-COPY ./start.sh /home/xuser/start.sh
-COPY --from=builder /app/gugugaga /home/xuser/gugugaga
-RUN chmod +x /home/xuser/QQ.AppImage && chmod +x /home/xuser/start.sh
+RUN chmod +x /home/xuser/QQ.AppImage
 
 RUN useradd -m xuser
 RUN /home/xuser/QQ.AppImage --appimage-extract && \
-    mv squashfs-root /home/xuser/QQ && \
+    mv squashfs-root /home/xuser/QQ
+
+COPY ./start.sh /home/xuser/start.sh
+COPY --from=builder /app/gugugaga /home/xuser/gugugaga
+RUN chmod +x /home/xuser/start.sh && \
     chown xuser:xuser /home/xuser -R && \
-    chown xuser:xuser /run/user/1001 && \
     chown -R root:root /home/xuser/QQ/chrome-sandbox && \
     chmod 4755 /home/xuser/QQ/chrome-sandbox
 
 USER xuser
 WORKDIR /home/xuser
-
-ENV XDG_RUNTIME_DIR=/run/user/1001
-ENV XPRA_SOCKET_DIR=/tmp/.xpra
 
 EXPOSE 14500
 
