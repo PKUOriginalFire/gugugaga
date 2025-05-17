@@ -15,13 +15,13 @@ RUN --mount=type=cache,target=/var/cache/apt \
     apt-get install -y zlib1g-dev fuse libfuse2 \
     libnss3 libgtk-3-0 libgbm1 libasound2t64 python3-uinput \
     fonts-wqy-microhei fonts-wqy-zenhei ttf-wqy-zenhei \
-    xpra dunst dbus-x11 xauth ffmpeg curl \
+    xpra dunst dbus-x11 xauth ffmpeg curl gosu \
     libx264-dev libvpx-dev libmp3lame-dev libx265-dev \
     libcurl4 libcurl3-gnutls \
     && apt-get clean
 
 # 创建必要的目录并设置权限
-RUN mkdir -p /home/xuser/.config && \
+RUN mkdir -p /home/xuser/ && \
     curl -o /home/xuser/QQ.AppImage https://dldir1.qq.com/qqfile/qq/QQNT/Linux/QQ_3.2.17_250429_x86_64_01.AppImage
 
 RUN chmod +x /home/xuser/QQ.AppImage
@@ -40,7 +40,6 @@ RUN chmod +x /home/xuser/start.sh && \
 RUN mkdir -p /run/user/$(id -u xuser) && \
     chown -R xuser:xuser /run/user/$(id -u xuser)
 
-USER xuser
 WORKDIR /home/xuser
 
 EXPOSE 14500

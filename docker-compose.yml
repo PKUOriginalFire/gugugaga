@@ -15,9 +15,12 @@ services:
     ports:
       - 14500:14500
     volumes:
-      - ./data:/home/xuser/.config
+      - app-data:/home/xuser/.config:z
     security_opt:
       - seccomp=unconfined
     restart: unless-stopped
     depends_on:
       - danmaku-server
+
+volumes:
+  app-data:
