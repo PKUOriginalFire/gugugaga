@@ -21,7 +21,7 @@ RUN --mount=type=cache,target=/var/cache/apt \
     && apt-get clean
 
 # 创建必要的目录并设置权限
-RUN mkdir -p /home/xuser && \
+RUN mkdir -p /home/xuser/.config && \
     curl -o /home/xuser/QQ.AppImage https://dldir1.qq.com/qqfile/qq/QQNT/Linux/QQ_3.2.17_250429_x86_64_01.AppImage
 
 RUN chmod +x /home/xuser/QQ.AppImage
