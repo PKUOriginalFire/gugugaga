@@ -31,8 +31,10 @@ RUN /home/xuser/QQ.AppImage --appimage-extract && \
     mv squashfs-root /home/xuser/QQ
 
 COPY ./start.sh /home/xuser/start.sh
+COPY ./app.sh /home/xuser/app.sh
 COPY --from=builder /app/gugugaga /home/xuser/gugugaga
 RUN chmod +x /home/xuser/start.sh && \
+    chmod +x /home/xuser/app.sh && \
     chown xuser:xuser /home/xuser -R && \
     chown -R root:root /home/xuser/QQ/chrome-sandbox && \
     chmod 4755 /home/xuser/QQ/chrome-sandbox
